@@ -7,6 +7,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const submitButton = document.getElementById("submit");
     const likeButton = document.getElementById("heart");
     const listOfLikes = document.querySelector(".likes")
+    const formData = document.getElementById("comment-form");
+    const comment = document.getElementById("comment-input");
+    const list =document.getElementById("list");
+    const ul = document.createElement("ul");
+    list.appendChild(ul);
 
     plusButton.addEventListener("click", () => {
         counter.innerText = parseInt(counter.innerText) + 1;
@@ -37,22 +42,28 @@ document.addEventListener("DOMContentLoaded", () => {
     
     setInterval(() => {
         if (pauseButton.innerHTML === " pause "){
+            numLikes = 1;
             counter.innerText = parseInt(counter.innerText) + 1;
         }}, 1000);
     
-    let numLikes = 1;
-    likeButton.addEventListener("click",()=>{
-        setTimeout(() => {
-            const newLike = document.createElement("li")
-            newLike.innerText = `Number ${counter.innerText} has been liked ${numLikes} times`
-            numLikes+=1;
-            listOfLikes.appendChild(newLike)
-        }, 0);
-    });
 
     
 
+    likeButton.addEventListener("click",()=>{
+        const newLike = document.createElement("li");
+        newLike.innerText = `Number ${counter.innerText} has been liked ${numLikes} times.`;
+        numLikes +=1 ;
+        listOfLikes.appendChild(newLike);
+    })
 
+    
+
+    formData.addEventListener("submit", (e)=>{
+        e.preventDefault()
+        const commentLi = document.createElement("li");
+        commentLi.innerText = comment.value
+        ul.appendChild(commentLi);
+    })
 
 
 

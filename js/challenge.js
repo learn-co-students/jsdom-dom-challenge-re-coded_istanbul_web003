@@ -34,7 +34,7 @@ function incrementCount(){
   
   let  countDisplayerStr  = document.getElementById("counter");
   let countDisplayerNum = parseInt(countDisplayerStr.innerText) + 1;
-  console.log(countDisplayerNum);
+  // console.log(countDisplayerNum);
   countDisplayerStr.innerText = countDisplayerNum ;
 }
 
@@ -136,25 +136,64 @@ likeBtn.addEventListener('click', likeNumber);
 
 
  function likeNumber(){
-  const likesList = document.getElementsByClassName('likes')[0];//ul
-  const counterNum  = parseInt(document.getElementById("counter").innerText);
-  const li= document.getElementById(`${counterNum}`);
+  const likesList = document.querySelector('.likes');//ul
+  const counterNum  =parseInt(document.getElementById("counter").innerText);
+  const liNodes= document.querySelectorAll("li");
   
-   //if there is no li, create a li with id ===counterNum and count =1
-   if (li===null){//li is null?? maybe not exist yet. 
-    const li = document.createElement('li');
-    let id= toString(counterNum);
-    li.innerHTML=`${counterNum} has been liked <span id=${id}>1<span> time`;
-    likesList.appendChild(li); 
+  if(document.querySelector(`#like-${counterNum}`)){
+    const li = document.querySelector(`#like-${counterNum}`);
+    const span = document.querySelector(`#like-${counterNum} .likes-count`);
     console.log(li)
-   }else{//else: there is a li with id === counterNum then Update count
-
-    let span= parseInt(document.querySelector(`span#${id}`).innerText);
-    li.innerHTML=`${counterNum} has been liked <span id=${id}>${span++}</span> times`;
+    console.log(span)
+    // const span = li.children;
+    // console.log(span.innerText)
+    span.innerText= parseInt(span.innerText)+1;
+    
+  }else{
+    const li= document.createElement("li");
+    li.innerHTML= `${counterNum} has been liked <span class="likes-count">1</span> time`;
+    li.setAttribute("id", `like-${counterNum}`)
+    likesList.appendChild(li); 
+  }
+    
 
     
-   }
-   
+
+  // if (liNodes){
+  //   for (let li of liNodes){
+  //     if (li.innerHTML.includes(counterNum)){
+  //       li.innerHTML= `${counterNum} has been liked <span>${count++}<span> times`
+  //     }
+  //   }
+  // }else {//doesnt work
+  //   console.log("hi")
+  //   const li= document.createElement("li"); 
+  //   li.innerHTML= `${counterNum} has been liked <span>${count}<span> time`;
+  //   likesList.appendChild(li); 
+  // }
+
+
+  //likesList.contains(li.innerText.includes(counterNum))
+  // if (!likesList.childNodes(li.innerText.includes(counterNum))||  li== null){// how to checkk if an element exists
+  //   const li= document.createElement("li"); 
+  //   li.innerHTML= `${counterNum} has been liked <span>${count}<span> time`;
+  //   likesList.appendChild(li); 
+
+  // }else {
+    
+  // let liNodes= document.querySelectorAll("li");
+
+  // for (let li of liNodes){
+  //   if (li.innerHTML.includes(counterNum)){
+  //     li.innerHTML= `${counterNum} has been liked <span>${count++}<span> times`
+  //   }
+  // }
+  // }
+    
+    
+    
+    
+
  }
 
 /* -------------------------------------------------------------------------- */
